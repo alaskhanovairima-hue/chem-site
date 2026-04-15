@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Химический балансатор</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: linear-gradient(135deg, #1e3c72, #2a5298, #6a11cb, #2575fc);
+    background-size: 300% 300%;
+    animation: bg 10s ease infinite;
+}
+
+@keyframes bg {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
+}
+
+.card {
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(10px);
+    padding: 30px;
+    border-radius: 20px;
+    width: 400px;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    color: white;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+input {
+    width: 90%;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    outline: none;
+    font-size: 16px;
+}
+
+button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    background: #ff4b2b;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #ff416c;
+    transform: scale(1.05);
+}
+
+#result {
+    margin-top: 20px;
+    font-size: 18px;
+    transition: 0.5s;
+}
+
+.fade {
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from {opacity: 0; transform: translateY(10px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+    <h1>⚗ Химический балансатор</h1>
+
+    <input id="eq" placeholder="Например: H2 + O2 = H2O">
+
+    <br>
+
+    <button onclick="solve()">Решить</button>
+
+    <div id="result"></div>
+</div>
+
+<script>
+function solve() {
+    let eq = document.getElementById("eq").value;
+    let res = "";
+
+    if (eq === "H2 + O2 = H2O") {
+        res = "✔ 2H2 + O2 = 2H2O";
+    }
+    else if (eq === "K2O + H2O = KOH") {
+        res = "✔ K2O + H2O = 2KOH";
+    }
+    else if (eq === "Na + Cl2 = NaCl") {
+        res = "✔ 2Na + Cl2 = 2NaCl";
+    }
+    else if (eq === "Fe + O2 = Fe2O3") {
+        res = "✔ 4Fe + 3O2 = 2Fe2O3";
+    }
+    else {
+        res = "❌ Нет в базе реакций";
+    }
+
+    let box = document.getElementById("result");
+    box.innerText = res;
+    box.classList.remove("fade");
+    void box.offsetWidth;
+    box.classList.add("fade");
+}
+</script>
+
+</body>
+</html>
